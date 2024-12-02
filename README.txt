@@ -25,3 +25,7 @@
 - src: nơi code chính của chúng ta.
 - vite.config.js: công cụ để chạy dự án - (live server)
 - .eslintrc.cjs: (remove) Thống nhất cách code trong dự án. ( chỉ được dùng let và const )
+
+# JSX
+- Code HTML trong JS
+
