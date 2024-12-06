@@ -7,6 +7,8 @@ import { Card } from "./components/card";
 import { Header } from "./components/header";
 import { Content } from "./components/content";
 import { Footer } from "./components/footer";
+import { Inline } from "./buoi-2/inline/inline";
+import { DataBinding } from "./buoi-2/data-binding/data-binding";
 
 export function App() {
   // Phải bao bọc bởi một thẻ cha
@@ -14,12 +16,16 @@ export function App() {
 
   return (
     <>
+      <DataBinding />
+
+      {/* <Inline /> */}
+
       {/* <Header></Header> */}
       {/* Nếu không content  */}
       <Header />
 
       <Content></Content>
-      
+
       <Card></Card>
       <Card />
 

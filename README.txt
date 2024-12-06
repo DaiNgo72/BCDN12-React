@@ -37,3 +37,18 @@
 - npm i <ten_package>
 
 # React-router
+
+# Style
+- inline style ✅
+- external style 
+- internal style
+# React 
+- inline style ✅
+- global 
+- module
+
+# Data binding
+- Dùng {}
+- khác với template string ``: ${}
+
+- kiểu dữ liệu chúng ta có thể binding lên trên UI: string, number, jsx.
