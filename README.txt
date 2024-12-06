@@ -25,3 +25,15 @@
 - src: nơi code chính của chúng ta.
 - vite.config.js: công cụ để chạy dự án - (live server)
 - .eslintrc.cjs: (remove) Thống nhất cách code trong dự án. ( chỉ được dùng let và const )
+
+# JSX
+- Code HTML trong JS
+
+# Update thư viện
+- npm update
+- npm outdated: liệt kê ra những thư viện lỗi thời
+- npm i react@latest: cài thư viện react với phiên bản mới nhất
+- npm i react-router: cài thư viện react-router
+- npm i <ten_package>
+
+# React-router
