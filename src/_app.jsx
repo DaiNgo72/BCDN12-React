@@ -10,13 +10,17 @@ import { Footer } from "./components/footer";
 import { Inline } from "./buoi-2/inline/inline";
 import { DataBinding } from "./buoi-2/data-binding/data-binding";
 
+import { HandleEvent } from "./buoi-2/handle-event/handle-event";
+
 export function App() {
   // Phải bao bọc bởi một thẻ cha
   // div, Fragment => <> </>
 
   return (
     <>
-      <DataBinding />
+      <HandleEvent />
+      
+      {/* <DataBinding /> */}
 
       {/* <Inline /> */}
 

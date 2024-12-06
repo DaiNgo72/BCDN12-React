@@ -52,3 +52,8 @@
 - khác với template string ``: ${}
 
 - kiểu dữ liệu chúng ta có thể binding lên trên UI: string, number, jsx.
+
+# Handle Event
+- on: viết thường
+- sự kiện: viết hoa
+vd: onClick, onHover, onMouseMove, ...
