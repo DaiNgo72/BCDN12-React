@@ -29,3 +29,32 @@
 # JSX
 - Code HTML trong JS
 
+# Update thư viện
+- npm update
+- npm outdated: liệt kê ra những thư viện lỗi thời
+- npm i react@latest: cài thư viện react với phiên bản mới nhất
+- npm i react-router: cài thư viện react-router
+- npm i <ten_package>
+
+# React-router
+
+# Style
+- inline style ✅
+- external style 
+- internal style
+# React 
+- inline style ✅
+- global: chỉ cần import vào thì sẽ ăn cho toàn bộ dự án
+- module: tên file phải là .module.css
+
+# Data binding
+- Dùng {}
+- khác với template string ``: ${}
+
+- kiểu dữ liệu chúng ta có thể binding lên trên UI: string, number, jsx.
+- Nếu muốn xử lý điều kiện trong binding thì sử dụng toán tử ba ngôi (ternary). Không sử dụng if else
+
+# Handle Event
+- on: viết thường
+- sự kiện: viết hoa
+vd: onClick, onHover, onMouseMove, ...
