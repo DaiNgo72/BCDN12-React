@@ -33,3 +33,7 @@
 - npm update
 - npm outdated: liệt kê ra những thư viện lỗi thời
 - npm i react@latest: cài thư viện react với phiên bản mới nhất
+- npm i react-router: cài thư viện react-router
+- npm i <ten_package>
+
+# React-router
