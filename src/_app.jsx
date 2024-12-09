@@ -8,18 +8,38 @@ import { Header } from "./components/header";
 import { Content } from "./components/content";
 import { Footer } from "./components/footer";
 
+import { DataBinding } from "./buoi-2/data-binding/data-binding";
+
+import { HandleEvent } from "./buoi-2/handle-event/handle-event";
+
+import { Inline } from "./buoi-2/inline/inline";
+
+import { Global } from "./buoi-2/global/global";
+
+import { Module } from "./buoi-2/module/module";
+
 export function App() {
   // Phải bao bọc bởi một thẻ cha
   // div, Fragment => <> </>
 
   return (
     <>
+      <Module></Module>
+
+      <Global></Global>
+
+      <Inline />
+
+      {/* <HandleEvent /> */}
+
+      {/* <DataBinding /> */}
+
       {/* <Header></Header> */}
       {/* Nếu không content  */}
       <Header />
 
       <Content></Content>
-      
+
       <Card></Card>
       <Card />
 
