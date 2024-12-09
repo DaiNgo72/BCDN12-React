@@ -58,3 +58,21 @@
 - on: viết thường
 - sự kiện: viết hoa
 vd: onClick, onHover, onMouseMove, ...
+
+# npm run <ten_script>
+# npx
+- npx vite: 
+- npx sẽ nhìn vào folder node_modules/bin
+- nếu như trong node_modules/bin không có vite thì nó sẽ down về và thực thi -> sau khi thực thi xong thì sẽ remove luôn
+
+# Join
+- method của array
+- [1,2,3].join("-") => "1-2-3"
+
+# Map
+- method của array
+- sau khi duyệt qua thì return về lại một mảng có độ dài bằng mảng truyền vào.
+- return về một mảng các phần tử có cấu trúc phụ thuộc vào return của callback mà mình tryền vào.
+
+# State
+- 
