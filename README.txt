@@ -25,3 +25,9 @@
 - src: nơi code chính của chúng ta.
 - vite.config.js: công cụ để chạy dự án - (live server)
 - .eslintrc.cjs: (remove) Thống nhất cách code trong dự án. ( chỉ được dùng let và const )
+
+# npm run <ten_script>
+# npx
+- npx vite: 
+- npx sẽ nhìn vào folder node_modules/bin
+- nếu như trong node_modules/bin không có vite thì nó sẽ down về và thực thi -> sau khi thực thi xong thì sẽ remove luôn
