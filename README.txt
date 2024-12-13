@@ -86,3 +86,13 @@ vd: onClick, onHover, onMouseMove, ...
 - Giúp chúng ta tái sử dụng lại những UI (layout) đã có chỉ khác nhau dữ liệu mà mình đưa lên giao diện
 
 - Có thể truyền bất kỳ kiểu dữ liệu gì cũng được thông qua props.
+
+# State
+- Sử dụng useState khi muốn cập nhật lại một giá trị nào đó và giao diện render lại giá trị đó lên trên giao diện giúp mình.
+- Có sự thay đổi về giao diện.
+- Có thể mang bất kỳ kiểu dữ liệu nào.
+- Nếu như muốn giá trị đó thay đổi làm cho giao diện cập nhật lại thì biến giá trị đó thành state. 
+
+# Render file static (image, mp3, font)
+- lưu ở trong folder public
+- Nếu như lưu ở nào nào đó khác public thì phải sử dụng import

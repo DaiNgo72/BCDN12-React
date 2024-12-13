@@ -24,13 +24,20 @@ import CompState from "./buoi-3/state/state";
 
 import { BaiTapProps } from "./buoi-4/bai-tap/bai-tap";
 
+import { TangGiamFont } from "./buoi-4/tang-giam-font";
+
+import { ThayDoiMauXe } from "./buoi-4/thay-doi-mau-xe";
+
+import { Gallery } from "./buoi-4/gallery";
+import { Gallery2 } from "./buoi-4/gallery2";
+
 export function App() {
   // Phải bao bọc bởi một thẻ cha
   // div, Fragment => <> </>
 
   return (
     <>
-      <BaiTapProps />
+      <Gallery2 />
     </>
   );
 }
