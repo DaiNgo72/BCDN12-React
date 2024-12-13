@@ -22,13 +22,15 @@ import { Props } from "./buoi-3/props/props";
 
 import CompState from "./buoi-3/state/state";
 
+import { BaiTapProps } from "./buoi-4/bai-tap/bai-tap";
+
 export function App() {
   // Phải bao bọc bởi một thẻ cha
   // div, Fragment => <> </>
 
   return (
     <>
-      <CompState />
+      <BaiTapProps />
     </>
   );
 }

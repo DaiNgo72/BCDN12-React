@@ -76,3 +76,13 @@ vd: onClick, onHover, onMouseMove, ...
 
 # State
 - 
+
+# Tổng kết 3 buổi vừa qua
+- 
+
+# Tham số
+- Giúp chúng ta tái sử dụng lại những logic bên trong function
+# Props
+- Giúp chúng ta tái sử dụng lại những UI (layout) đã có chỉ khác nhau dữ liệu mà mình đưa lên giao diện
+
+- Có thể truyền bất kỳ kiểu dữ liệu gì cũng được thông qua props.
