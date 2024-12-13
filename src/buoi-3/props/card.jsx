@@ -1,5 +1,5 @@
 import css from "./props.module.css";
-import {mergeCln} from './props';
+import { mergeCln } from "./props";
 
 export function Card(props) {
   console.log("props", props);
