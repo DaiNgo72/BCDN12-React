@@ -87,6 +87,8 @@ vd: onClick, onHover, onMouseMove, ...
 
 - Có thể truyền bất kỳ kiểu dữ liệu gì cũng được thông qua props.
 
+- Giúp chúng ta truyền dữ liệu từ component cha xuống component con.
+
 # State
 - Sử dụng useState khi muốn cập nhật lại một giá trị nào đó và giao diện render lại giá trị đó lên trên giao diện giúp mình.
 - Có sự thay đổi về giao diện.
@@ -96,3 +98,47 @@ vd: onClick, onHover, onMouseMove, ...
 # Render file static (image, mp3, font)
 - lưu ở trong folder public
 - Nếu như lưu ở nào nào đó khác public thì phải sử dụng import
+
+# Render List Array
+- prop key phải đặt ở thẻ cha bao bọc ngoài cùng.
+- Nếu như là thẻ <></> bao bọc ngoài cùng thì dùng dạng Fragment không dùng dạng rút gọn.
+
+# Destructuring Object
+- tên biến chúng ta muốn tạo trùng với tên giá trị thuộc tính của object chúng ta muốn lấy.
+```js
+const sv = {
+    name: "Nguyen Van A",
+    age: 20,
+}
+
+// const name = sv.name;
+const {name} = sv;
+
+// const age = sv.age;
+const {age} = sv;
+```
+
+# Closure:
+- khi một hàm "nhớ" phạm vi nơi nó được tạo ra
+- Khi một hàm được định nghĩa trong một phạm vi (scope) nào đó, nó "ghi nhớ" phạm vi này ngay cả khi phạm vi đó không còn tồn tại.
+Closure cho phép một hàm truy cập các biến trong phạm vi bên ngoài của nó, ngay cả sau khi phạm vi đó đã kết thúc.
+```js
+// Closure: khái niệm trong js
+
+function outer() {
+  let count = 0; // Biến trong phạm vi hàm outer
+
+  function inner() {
+    debugger;
+    count++; // Hàm inner sử dụng biến count từ outer
+    console.log(count);
+  }
+
+  return inner; // Trả về hàm inner
+}
+
+const inner = outer(); // Tạo closure
+inner(); // 1
+inner(); // 2
+inner(); // 3
+```
