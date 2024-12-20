@@ -1,6 +1,50 @@
 export function GioHang(props) {
   // [1]: binding
-  const { carts } = props;
+  const { carts, setCarts } = props;
+
+  const handleXoaSanPham = (maSP) => {
+    const newCarts = carts.filter((cart) => {
+      // lấy ra những sản phẩm có mã sản phẩm khác với mã sản phẩm mà mình muốn xóa
+      return cart.maSP !== maSP;
+    });
+    setCarts(newCarts);
+  };
+
+  const handleTangSoLuong = (maSP) => {
+    const newCarts = carts.map((cart) => {
+      if (cart.maSP === maSP) {
+        return {
+          ...cart,
+          soLuong: cart.soLuong + 1,
+        };
+      }
+
+      return cart;
+    });
+
+    setCarts(newCarts);
+  };
+
+  const handleGiamSoLuong = (maSP) => {
+    const findItem = carts.find((cart) => cart.maSP === maSP);
+    // Nếu số lượng của sản phẩm đó là 1 thì xóa sản phẩm đó đi
+    if (findItem.soLuong === 1) {
+      handleXoaSanPham(maSP);
+    } else {
+      const newCarts = carts.map((cart) => {
+        if (cart.maSP === maSP) {
+          return {
+            ...cart,
+            soLuong: cart.soLuong - 1,
+          };
+        }
+
+        return cart;
+      });
+
+      setCarts(newCarts);
+    }
+  };
 
   return (
     <>
@@ -31,13 +75,19 @@ export function GioHang(props) {
                     display: "flex",
                   }}
                 >
-                  <button>-</button>
+                  <button onClick={() => handleGiamSoLuong(sanPham.maSP)}>
+                    -
+                  </button>
                   <p>{sanPham.soLuong}</p>
-                  <button>+</button>
+                  <button onClick={() => handleTangSoLuong(sanPham.maSP)}>
+                    +
+                  </button>
                 </td>
                 <td>{sanPham.giaBan * sanPham.soLuong}</td>
                 <td>
-                  <button>Xóa</button>
+                  <button onClick={() => handleXoaSanPham(sanPham.maSP)}>
+                    Xóa
+                  </button>
                 </td>
               </tr>
             );

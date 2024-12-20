@@ -2,29 +2,31 @@ import { Fragment, useState } from "react";
 import { MOCK_DATA } from "./__mock-data__";
 import { GioHang } from "./gio-hang";
 
+// gia tri truoc vs gia tri hien tai
+
 export function PhoneShop() {
   const [carts, setCarts] = useState([
-    {
-      maSP: 1,
-      tenSP: "VinSmart Live",
-      manHinh: "AMOLED, 6.2, Full HD+",
-      heDieuHanh: "Android 9.0 (Pie)",
-      cameraTruoc: "20 MP",
-      cameraSau: "Chính 48 MP & Phụ 8 MP, 5 MP",
-      ram: "4 GB",
-      rom: "64 GB",
-      giaBan: 5700000,
-      hinhAnh: "./img/vsphone.jpg",
-      // ---
-      soLuong: 2,
-    },
+    // {
+    //   maSP: 1,
+    //   tenSP: "VinSmart Live",
+    //   manHinh: "AMOLED, 6.2, Full HD+",
+    //   heDieuHanh: "Android 9.0 (Pie)",
+    //   cameraTruoc: "20 MP",
+    //   cameraSau: "Chính 48 MP & Phụ 8 MP, 5 MP",
+    //   ram: "4 GB",
+    //   rom: "64 GB",
+    //   giaBan: 5700000,
+    //   hinhAnh: "./img/vsphone.jpg",
+    //   // ---
+    //   soLuong: 2,
+    // },
   ]);
   // [3]
   const [sanPham, setSanPham] = useState(MOCK_DATA[0]);
 
   return (
     <>
-      <GioHang carts={carts} />
+      <GioHang carts={carts} setCarts={setCarts} />
 
       <div style={{ display: "flex", gap: 20 }}>
         {MOCK_DATA.map((item) => {
@@ -35,6 +37,7 @@ export function PhoneShop() {
               setSanPham={setSanPham}
               key={item.maSP}
               item={item}
+              carts={carts}
             />
           );
         })}
@@ -49,8 +52,56 @@ function Phone(props) {
   // [2]: cập nhật state
 
   // const item = props.item;
-  const { item, setSanPham, setCarts } = props; // tạo biến có tên là item và giá trị của nó là props.item
+  const { item, setSanPham, setCarts, carts } = props; // tạo biến có tên là item và giá trị của nó là props.item
 
+  const handleXemChiTiet = () => {
+    // gọi setSanPham
+    setSanPham(item);
+  };
+
+  const handleThemVaoGioHang = () => {
+    // 1. kiểm tra sản phẩm đó có tồn tại trong giỏ hàng hay chưa
+    // 2. Nếu chưa
+    //  2.1. Thêm vào giỏ hàng sl là 1
+    //  2.2 Giữ nguyên vị trí
+    // 3. Nếu đã có rồi
+    //  3.1. Tăng sl của sản phẩm đó lên 1 đơn vị -> +1
+
+    const idxItem = carts.findIndex((cart) => {
+      return item.maSP === cart.maSP;
+      // if (item.maSP === cart.maSP) {
+      //   return true;
+      // }
+
+      // return false;
+    });
+
+    // Nếu nhưng không có thì idxItem = -1;
+
+    // Nếu như có tồn tại
+    if (idxItem > -1) {
+      // DK -> 3
+      // ...
+      const cloneArr = carts.map((cart, index) =>
+        index === idxItem ? { ...cart, soLuong: cart.soLuong + 1 } : cart
+      );
+
+      setCarts(cloneArr);
+    } else {
+      // DK -> 2
+      const cloneArr = [...carts, { ...item, soLuong: 1 }];
+
+      setCarts(cloneArr);
+    }
+  };
+
+
+  // ------------------------
+  // /\/\/\/\/\/\/\/\/\/\/\/\
+  // ------LOGIC-------------
+
+  // ------GIAO DIỆN---------
+  // \/\/\/\/\/\/\/\/\/\/\/\/
   return (
     // SAI ❌
     <Fragment key={item.maSP}>
@@ -66,32 +117,13 @@ function Phone(props) {
         <div>
           <p>{item.tenSP}</p>
 
-          <button
-            onClick={() => {
-              // gọi setSanPham
-              setSanPham(item);
-            }}
-          >
-            Xem Chi Tiết
-          </button>
+          <button onClick={handleXemChiTiet}>Xem Chi Tiết</button>
 
           <button
             style={{
               marginLeft: 10,
             }}
-            onClick={() => {
-              // Thêm sản phẩm vào
-
-              setCarts((preCarts) => {
-                preCarts.push(item); //❌
-
-                console.log(preCarts); // có thêm vào sản phẩm mới.
-
-                return preCarts; // không thay đổi, không trigger render lại giao diện
-              });
-
-              // carts.push(item);
-            }}
+            onClick={handleThemVaoGioHang}
           >
             Thêm vào giỏ hàng
           </button>
