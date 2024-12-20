@@ -195,3 +195,6 @@ sv2 !== sv1 // true
 - Nếu như cập nhật giá trị mới bằng giá trị trước đó thì react sẽ không re-render giao diện.
 - Muốn react re-render thì phải cập nhật giá trị mới khác giá trị trước đó.
 - Chú ý: đặc biệt đối với ARRAY, Object.
+
+# react-router: v7
+- npm i react-router@latest

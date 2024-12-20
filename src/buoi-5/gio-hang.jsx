@@ -98,8 +98,3 @@ export function GioHang(props) {
   );
 }
 
-function inner() {
-  const c = 10;
-}
-
-function inner2() {}
