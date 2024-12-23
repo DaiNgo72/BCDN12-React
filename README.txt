@@ -198,3 +198,20 @@ sv2 !== sv1 // true
 
 # react-router: v7
 - npm i react-router@latest
+
+# useRef
+- Giúp chúng ta lấy 1 element trong React.
+- Trả về 1 object: { current: <gia_tri> }
+
+# component
+- Khi code component thì chú ý không xét cứng kích thước width, height của component đó
+- Kích thước width, height: để nơi mình xử dụng muốn xét bao nhiều thì xét
+
+# Form
+- không được sử dụng giá trị: null hay undefined để binding cho prop value của thẻ input
+- Nếu muốn reset về trạng thái ban đầu thì nhớ phải dùng empty string
+
+# computed property
+# spread props
+# two way binding
+# form
