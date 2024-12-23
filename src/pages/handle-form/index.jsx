@@ -3,8 +3,8 @@ import { Input } from "./input";
 import { Select } from "./select";
 import { Button } from "./button";
 
-export function HandleForm() {
-  const [listStudent, setListStudent] = useState([]);
+export function HandleForm({ listStudent, setListStudent }) {
+  //   const { listStudent, setListStudent } = props;
 
   const [student, setStudent] = useState({
     msv: "001",
