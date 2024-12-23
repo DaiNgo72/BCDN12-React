@@ -10,8 +10,8 @@ import { Routes, Route, NavLink, Link } from "react-router";
 import { DataBinding } from "./buoi-2/data-binding/data-binding";
 import { HandleEvent } from "./buoi-2/handle-event/handle-event";
 import { Home } from "./home";
-import { Gallery } from "./buoi-4/gallery";
 import { ErrorPage } from "./error";
+import { HandleForm } from "./pages/handle-form";
 
 export function App() {
   // Phải bao bọc bởi một thẻ cha
@@ -34,6 +34,8 @@ export function App() {
         <Link to="data-binding">Data Binding</Link>
         <br />
         <Link to="handle-event">Handle Event</Link>
+        <br />
+        <NavLink to={"handle-form"}>Handle Form</NavLink>
       </header>
 
       {/* Quy định đường dẫn nào đến page nào */}
@@ -52,6 +54,8 @@ export function App() {
         <Route path="data-binding" element={<DataBinding />} />
 
         <Route path="handle-event" element={<HandleEvent />} />
+
+        <Route path="handle-form" element={<HandleForm />} />
 
         {/* Nhận mọi đường dẫn nếu như không có đường dẫn nào setup sẵn trước đó, thì sẽ rơi vào trường hợp ngoại lệ này. */}
         {/* Liên tưởng giống switch case và đây là case default */}
