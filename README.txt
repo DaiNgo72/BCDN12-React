@@ -142,3 +142,59 @@ inner(); // 1
 inner(); // 2
 inner(); // 3
 ```
+
+# Primitive type
+- string, number, boolean, null, undefined, ...
+- Được lưu ở vùng nhớ stack của thanh RAM
+
+# Object type
+- array, object, (function thuộc object)
+- Được lưu ở vùng nhớ heap của thanh RAM
+
+# stack
+- Dùng để lưu trữ những dữ liệu có kích thước cố định.
+```js
+let age = 20;
+age = 21;
+// biến thay đổi giá trị
+```
+
+# heap
+- Dùng để lưu trữ những dữ liệu có kích thước không cố định
+```js
+let sv = {};
+sv.age = 20;
+```
+
+# Copy Array
+Khi thay đổi mảng mới thì mảng cũ không bị ảnh hưởng.
+
+- slice
+- map
+- spread operator
+
+# Copy Object
+
+- Object.assign({}, <đối tượng muốn copy toàn bộ thuộc tính>)
+
+```js
+let sv1 = {name: 'sv1', toan: 10, ly: 10, hoa: 10};
+let sv2 = Object.assign({}, sv1);
+
+sv2 !== sv1 // true
+```
+- spread operator
+```js
+let sv1 = {name: 'sv1', toan: 10, ly: 10, hoa: 10};
+let sv2 = {...sv1, name: 'sv2'};
+
+sv2 !== sv1 // true
+```
+
+# Set State
+- Nếu như cập nhật giá trị mới bằng giá trị trước đó thì react sẽ không re-render giao diện.
+- Muốn react re-render thì phải cập nhật giá trị mới khác giá trị trước đó.
+- Chú ý: đặc biệt đối với ARRAY, Object.
+
+# react-router: v7
+- npm i react-router@latest
