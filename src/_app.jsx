@@ -14,6 +14,7 @@ import { ErrorPage } from "./error";
 import { HandleForm } from "./pages/handle-form";
 import { DanhSachSinhVien } from "./pages/danh-sach-sinh-vien";
 import { ChiTietSinhVien } from "./pages/chi-tiet-sinh-vien";
+import { TodoPage } from "./pages/todo";
 
 export function App() {
   const [listStudent, setListStudent] = useState([]);
@@ -33,18 +34,14 @@ export function App() {
         {/* 😊 */}
         {/* Quay về trang chủ: -> https://localhost:5173/ */}
         <NavLink to="/">Home</NavLink>
-        <br />
         {/* Quay về phone shope: -> https://localhost:5173/phone-shop */}
         <NavLink to="phone-shop">Phone Shop</NavLink>
-        <br />
         {/* 😊 */}
         <Link to="data-binding">Data Binding</Link>
-        <br />
         <Link to="handle-event">Handle Event</Link>
-        <br />
         <NavLink to={"handle-form"}>Handle Form</NavLink>
-
         <NavLink to={"danh-sach-sinh-vien"}>Danh sách sinh viên</NavLink>
+        <NavLink to={"todo"}>Todo</NavLink>
       </header>
 
       {/* Quy định đường dẫn nào đến page nào */}
@@ -109,6 +106,8 @@ export function App() {
           path="chi-tiet-sinh-vien/:msv"
           element={<ChiTietSinhVien listStudent={listStudent} />}
         ></Route>
+
+        <Route path="todo" element={<TodoPage />}></Route>
 
         {/* Nhận mọi đường dẫn nếu như không có đường dẫn nào setup sẵn trước đó, thì sẽ rơi vào trường hợp ngoại lệ này. */}
         {/* Liên tưởng giống switch case và đây là case default */}

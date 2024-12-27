@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 
 export function DanhSachSinhVien({
@@ -23,6 +24,12 @@ export function DanhSachSinhVien({
     const studentEdit = listStudent.find((student) => student.msv === msv);
     setStudentEdit(studentEdit);
   };
+
+  useEffect(() => {
+    return () => {
+      console.log("danh sach sinh vien chuan bi xoa khoi UI");
+    };
+  }, []);
 
   return (
     <>

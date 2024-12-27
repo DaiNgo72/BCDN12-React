@@ -233,4 +233,23 @@ const navigate = useNavigate();
 
 navigate("list-student");
 navigate(-1);
-```  
+```
+# React
+- keyword: re-render để load lại dữ liệu mới lên trên giao diện.
+
+
+# Life-cycle (vòng đời của component).
+- mouting: Trang web lần đầu xuất hiện trên giao diện
+- updating: Trang web có cập nhật về state, props. (re-render)
+- unmouting: Trang web bị xóa khỏi giao diện
+
+# UseEffect
+- Giúp chúng ta can thiệp vào trong từ vòng đời của component
+- mọi useEffect luôn chạy lần đầu
+- dependencies: khi có một trong những giá trị truyền vào mảng dependencies thay đổi thì callback của useEffect sẽ được gọi
+- không truyền dependencies thì sẽ chạy mỗi lần re-render. (không có tham số t2 của useEffect)
+- thứ tự chạy: UI -> useEffect::callback. luôn luôn đợi giao diện render lên xong mới gọi vào callback của useEffect.
+
+# Meeting tối CN
+- refactor
+- promise
