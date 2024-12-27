@@ -224,3 +224,13 @@ sv2 !== sv1 // true
 - "list-student": hiện tại + path
   + Hiện tại đang ở địa chỉ: http://localhost:5173/chi-tiet
   + http://localhost:5173/chi-tiet + list-student => http://localhost:5173/chi-tiet/list-student
+
+# useNavigate
+- dùng để di chuyển giữa các page mà không cần sử dụng link hay navlink
+```jsx
+import {useNavigate} from 'react-router'
+const navigate = useNavigate();
+
+navigate("list-student");
+navigate(-1);
+```  
