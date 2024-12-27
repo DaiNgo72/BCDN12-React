@@ -1,6 +1,12 @@
-import { Link } from "react-router";
-export function DanhSachSinhVien({ listStudent, setListStudent }) {
-  console.log(listStudent);
+import { Link, useNavigate } from "react-router";
+
+export function DanhSachSinhVien({
+  listStudent,
+  setListStudent,
+  setIsEdit,
+  setStudentEdit,
+}) {
+  const navigate = useNavigate();
 
   const handleDeleteStudent = (msv) => {
     setListStudent((pre) => {
@@ -8,6 +14,14 @@ export function DanhSachSinhVien({ listStudent, setListStudent }) {
 
       return newList;
     });
+  };
+
+  const handleEditStudent = (msv) => {
+    navigate("/handle-form");
+    setIsEdit(true);
+
+    const studentEdit = listStudent.find((student) => student.msv === msv);
+    setStudentEdit(studentEdit);
   };
 
   return (
@@ -54,7 +68,10 @@ export function DanhSachSinhVien({ listStudent, setListStudent }) {
                     >
                       Xóa
                     </button>
-                    <button className="cursor-pointer ml-1 px-2 py-1 bg-slate-500 text-white rounded">
+                    <button
+                      onClick={() => handleEditStudent(student.msv)}
+                      className="cursor-pointer ml-1 px-2 py-1 bg-slate-500 text-white rounded"
+                    >
                       Chỉnh sửa
                     </button>
                   </td>

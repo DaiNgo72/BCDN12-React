@@ -215,3 +215,12 @@ sv2 !== sv1 // true
 # spread props
 # two way binding
 # form
+
+# Path
+- "/list-student": domain + path 
+  + Hiện tại đang ở địa chỉ: http://localhost:5173/chi-tiet
+  + http://localhost:5173 + /list-student => http://localhost:5173/list-student
+
+- "list-student": hiện tại + path
+  + Hiện tại đang ở địa chỉ: http://localhost:5173/chi-tiet
+  + http://localhost:5173/chi-tiet + list-student => http://localhost:5173/chi-tiet/list-student
