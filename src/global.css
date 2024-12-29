@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 a.active {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
+}
+
+a {
+  border: 1px solid black;
+  padding: 6px 8px;
+  margin: 0 4px;
 }

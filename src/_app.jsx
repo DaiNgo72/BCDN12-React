@@ -14,9 +14,14 @@ import { ErrorPage } from "./error";
 import { HandleForm } from "./pages/handle-form";
 import { DanhSachSinhVien } from "./pages/danh-sach-sinh-vien";
 import { ChiTietSinhVien } from "./pages/chi-tiet-sinh-vien";
+import { TodoPage } from "./pages/todo";
 
 export function App() {
   const [listStudent, setListStudent] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
+  const [studentEdit, setStudentEdit] = useState({});
+  console.log("studentEdit", studentEdit);
+
   // Phải bao bọc bởi một thẻ cha
   // div, Fragment => <> </>
 
@@ -29,18 +34,14 @@ export function App() {
         {/* 😊 */}
         {/* Quay về trang chủ: -> https://localhost:5173/ */}
         <NavLink to="/">Home</NavLink>
-        <br />
         {/* Quay về phone shope: -> https://localhost:5173/phone-shop */}
         <NavLink to="phone-shop">Phone Shop</NavLink>
-        <br />
         {/* 😊 */}
         <Link to="data-binding">Data Binding</Link>
-        <br />
         <Link to="handle-event">Handle Event</Link>
-        <br />
         <NavLink to={"handle-form"}>Handle Form</NavLink>
-
         <NavLink to={"danh-sach-sinh-vien"}>Danh sách sinh viên</NavLink>
+        <NavLink to={"todo"}>Todo</NavLink>
       </header>
 
       {/* Quy định đường dẫn nào đến page nào */}
@@ -64,8 +65,12 @@ export function App() {
           path="handle-form"
           element={
             <HandleForm
+              studentEdit={studentEdit}
+              isEdit={isEdit}
               listStudent={listStudent}
               setListStudent={setListStudent}
+              setIsEdit={setIsEdit}
+              setStudentEdit={setStudentEdit}
             />
           }
         />
@@ -76,19 +81,33 @@ export function App() {
             <DanhSachSinhVien
               listStudent={listStudent}
               setListStudent={setListStudent}
+              setIsEdit={setIsEdit}
+              setStudentEdit={setStudentEdit}
             />
           }
         />
 
-{/*
+        {/*
 - Những đường dẫn sẽ render ra trang ChiTietSinhVien
 - /chi-tiet-sinh-vien/1
 - /chi-tiet-sinh-vien/2
 - /chi-tiet-sinh-vien/3
+- /chi-tiet-sinh-vien/afjksdlfjlaksdf
 
 - /chi-tiet-sinh-vien ❌
+- /chi-tiet-sinh-vien/1/2 ❌
 */}
-        <Route path="chi-tiet-sinh-vien/:msv" element={<ChiTietSinhVien />}></Route>
+
+        {/* 
+  :msv làm tham số của đường dẫn
+  - để lấy được giá trị tham số đó thì dùng useParams từ react-router
+*/}
+        <Route
+          path="chi-tiet-sinh-vien/:msv"
+          element={<ChiTietSinhVien listStudent={listStudent} />}
+        ></Route>
+
+        <Route path="todo" element={<TodoPage />}></Route>
 
         {/* Nhận mọi đường dẫn nếu như không có đường dẫn nào setup sẵn trước đó, thì sẽ rơi vào trường hợp ngoại lệ này. */}
         {/* Liên tưởng giống switch case và đây là case default */}

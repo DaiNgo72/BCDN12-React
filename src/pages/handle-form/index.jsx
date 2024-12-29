@@ -1,10 +1,18 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Input } from "./input";
 import { Select } from "./select";
 import { Button } from "./button";
+import { useNavigate } from "react-router";
 
-export function HandleForm({ listStudent, setListStudent }) {
-  //   const { listStudent, setListStudent } = props;
+export function HandleForm({
+  listStudent,
+  setListStudent,
+  isEdit,
+  studentEdit,
+  setIsEdit,
+  setStudentEdit,
+}) {
+  const navigate = useNavigate();
 
   const [student, setStudent] = useState({
     msv: "001",
@@ -28,46 +36,91 @@ export function HandleForm({ listStudent, setListStudent }) {
     setStudent(newStudent);
   };
 
-  console.log("[listStudent]", listStudent);
-
   const handleSubmit = (event) => {
     // Prevent reload page
     event.preventDefault();
 
-    // Copy danh sách sinh viên cũ + thêm sinh viên mới vào
-    const newListStudent = [...listStudent, student];
+    if (isEdit) {
+      // -------------------
 
-    setListStudent(newListStudent);
+      const newListStudent = listStudent.map((st) => {
+        if (st.msv === student.msv) {
+          // Map đến đúng vị trí cần thay đổi thì update về state student
+          // vì state student là giá trị người dùng nhập vào.
+          return student;
+        } else {
+          return st;
+        }
+      });
 
-    setStudent({
-      msv: "",
-      fullName: "",
-      age: "",
-      phone: "",
-      email: "",
-      gender: "00",
-    });
+      setListStudent(newListStudent);
+
+      // Sau khi update thành công
+      setIsEdit(false);
+      // reset studentEdit về null
+      setStudentEdit(null);
+
+      // chuyển về trang trước đó.
+      // 1: đi tới trang tiếp theo
+      // -1: trở về trang trước đó
+      navigate(-1);
+    } else {
+      // Copy danh sách sinh viên cũ + thêm sinh viên mới vào
+      const newListStudent = [...listStudent, student];
+
+      setListStudent(newListStudent);
+
+      setStudent({
+        msv: "",
+        fullName: "",
+        age: "",
+        phone: "",
+        email: "",
+        gender: "00",
+      });
+    }
   };
 
-  //   const handleChangeMSV = (e) => {};
-  //   const handleChangeFullName = (e) => {};
+  useEffect(
+    () => {
+      // Kiểm tra, nếu isEdit là true thì sẽ cập nhật student thành studentEdit
+      if (isEdit) {
+        setStudent(studentEdit);
+      }
+    },
+    // Những giá trị bị theo dõi, khi nào 1 trong những giá trị này thay đổi thì callback của useEffect sẽ chạy.
+    [isEdit, studentEdit]
+  );
+
+  // Trước khi component bị ẩn khỏi giao diện
+  useEffect(() => {
+    // ----------------
+    // ----------------
+    return () => {
+      // thì sẽ gọi function này
+      setIsEdit(false);
+      setStudentEdit(null);
+    };
+  }, []);
 
   return (
     <>
       <h1>Tạo Sinh Viên</h1>
 
       <form
+        // Khi button type submit click thì sẽ trigger sự kiện onSubmit của form
         onSubmit={handleSubmit}
         className="border border-gray-400 p-4 rounded"
       >
         <div className="w-full">
           <Input
-            value={student.msv}
             label="MSV"
+            value={student.msv}
             type="text"
             placeholder="Nhập mã số sinh viên"
             onChange={handleChange}
             name="msv"
+            disabled={isEdit}
           />
         </div>
 
@@ -121,54 +174,8 @@ export function HandleForm({ listStudent, setListStudent }) {
 
         <br />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{isEdit ? "Update" : "Submit"}</Button>
       </form>
     </>
   );
 }
-
-export function HandleFormDemo() {
-  const inputRef = useRef();
-  const [name, setName] = useState("Cyber");
-
-  const handleSubmit = () => {
-    // document.querySelector("input").value
-    // const value = inputRef.current.value;
-
-    console.log(name);
-  };
-
-  const handleChangeValue = (e) => {
-    setName(e.target.value);
-  };
-
-  //   UI
-  // \/\/\/\/\/\/\/
-  return (
-    <>
-      <input
-        // Lấy một element bằng React
-        ref={inputRef}
-        className="px-4 py-2 border rounded border-black"
-        type="text"
-        placeholder="Enter your name"
-        // Binding 1 chiều từ dữ liệu của state xuống giao diện
-        value={name}
-        // Binding 2 chiều từ giao diện lên state
-        // Khi gõ vào input thì name sẽ thay đổi theo giá trị của input
-        onChange={handleChangeValue}
-      />
-      <button onClick={handleSubmit}>Submit</button>
-    </>
-  );
-}
-
-const linhDong = "age";
-
-const sv = {
-  name: 20,
-
-  [linhDong]: "Nguyen Van A",
-};
-
-console.log(sv);

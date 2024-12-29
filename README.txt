@@ -215,3 +215,41 @@ sv2 !== sv1 // true
 # spread props
 # two way binding
 # form
+
+# Path
+- "/list-student": domain + path 
+  + Hiện tại đang ở địa chỉ: http://localhost:5173/chi-tiet
+  + http://localhost:5173 + /list-student => http://localhost:5173/list-student
+
+- "list-student": hiện tại + path
+  + Hiện tại đang ở địa chỉ: http://localhost:5173/chi-tiet
+  + http://localhost:5173/chi-tiet + list-student => http://localhost:5173/chi-tiet/list-student
+
+# useNavigate
+- dùng để di chuyển giữa các page mà không cần sử dụng link hay navlink
+```jsx
+import {useNavigate} from 'react-router'
+const navigate = useNavigate();
+
+navigate("list-student");
+navigate(-1);
+```
+# React
+- keyword: re-render để load lại dữ liệu mới lên trên giao diện.
+
+
+# Life-cycle (vòng đời của component).
+- mouting: Trang web lần đầu xuất hiện trên giao diện
+- updating: Trang web có cập nhật về state, props. (re-render)
+- unmouting: Trang web bị xóa khỏi giao diện
+
+# UseEffect
+- Giúp chúng ta can thiệp vào trong từ vòng đời của component
+- mọi useEffect luôn chạy lần đầu
+- dependencies: khi có một trong những giá trị truyền vào mảng dependencies thay đổi thì callback của useEffect sẽ được gọi
+- không truyền dependencies thì sẽ chạy mỗi lần re-render. (không có tham số t2 của useEffect)
+- thứ tự chạy: UI -> useEffect::callback. luôn luôn đợi giao diện render lên xong mới gọi vào callback của useEffect.
+
+# Meeting tối CN
+- refactor
+- promise
