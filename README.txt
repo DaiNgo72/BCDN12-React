@@ -241,7 +241,7 @@ navigate(-1);
 # Life-cycle (vòng đời của component).
 - mouting: Trang web lần đầu xuất hiện trên giao diện
 - updating: Trang web có cập nhật về state, props. (re-render)
-- unmouting: Trang web bị xóa khỏi giao diện
+- unmouting: Trang web bị xóa khỏi giao diện hay là cây DOM
 
 # UseEffect
 - Giúp chúng ta can thiệp vào trong từ vòng đời của component
@@ -253,3 +253,37 @@ navigate(-1);
 # Meeting tối CN
 - refactor
 - promise
+
+# Query string
+- Bổ sung thêm thông tin, mang thông tin từ trang này sang trang khác.
+- /home?q=react&location=vietname&from=danang
+```jsx
+  const [queryString] = useSearchParams();
+
+  console.log(queryString.get("msv"));
+  console.log(queryString.get("type"));
+```
+
+# Tuần sau
+- Bất đồng bộ
+
+# Object.values
+- chuyển object về array chứa các giá trị của property
+
+# Object.keys
+- chuyển object về array chứa các tên của property
+
+# Object.entries
+- chuyển object về array mỗi phần tử của array là [key, value]
+
+# State
+- Khi giá trị của biến thay đổi có ảnh hưởng đến UI.
+
+# Props
+- Khi mình muốn truyền giá trị từ component cha -> xuống component con.
+
+# Life Cycle
+- mouting
+- updating
+- unmouting
+

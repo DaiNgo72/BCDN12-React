@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 export function ChiTietSinhVien({ listStudent }) {
   const params = useParams();
@@ -6,6 +6,7 @@ export function ChiTietSinhVien({ listStudent }) {
   console.log("[msv]", msv);
   const student = listStudent.find((student) => student.msv === msv);
   console.log(student);
+  const navigate = useNavigate();
 
   return (
     <div className="border rounded p-10">
@@ -26,7 +27,13 @@ export function ChiTietSinhVien({ listStudent }) {
         <p>Phone: {student.phone}</p>
         <p>Email: {student.email}</p>
 
-        <button>Edit</button>
+        <button
+          onClick={() => {
+            navigate(`/handle-form?msv=${msv}&type=edit`);
+          }}
+        >
+          Edit
+        </button>
       </div>
     </div>
   );

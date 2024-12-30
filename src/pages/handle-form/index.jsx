@@ -2,25 +2,55 @@ import { useRef, useState, useEffect } from "react";
 import { Input } from "./input";
 import { Select } from "./select";
 import { Button } from "./button";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 
-export function HandleForm({
-  listStudent,
-  setListStudent,
-  isEdit,
-  studentEdit,
-  setIsEdit,
-  setStudentEdit,
-}) {
+export function HandleForm({ listStudent, setListStudent }) {
   const navigate = useNavigate();
+  const [queryString] = useSearchParams();
 
-  const [student, setStudent] = useState({
-    msv: "001",
-    fullName: "Nguyen Van A",
-    age: 20,
-    gender: "00",
-    phone: "0123456789",
-    email: "nva@gmail.com",
+  const type = queryString.get("type");
+  const msv = queryString.get("msv");
+  const isEdit = type === "edit";
+  const studentEdit = listStudent.find((s) => s.msv === msv);
+
+  // Giá trị default của student
+  // Xét cho lần render đầu tiên - mouting
+  const [student, setStudent] = useState(
+    isEdit
+      ? studentEdit
+      : {
+          msv: "001",
+          fullName: "Nguyen Van A",
+          age: "20",
+          gender: "00",
+          phone: "0123456789",
+          email: "nva@gmail.com",
+
+          msv: "",
+          fullName: "",
+          age: "",
+          gender: "",
+          phone: "",
+          email: "",
+        }
+  );
+
+  const [errors, setErrors] = useState({
+    msv: "",
+    fullName: "",
+    age: "",
+    gender: "",
+    phone: "",
+    email: "",
+  });
+
+  const [touches, setTouches] = useState({
+    msv: false,
+    fullName: false,
+    age: false,
+    gender: false,
+    phone: false,
+    email: false,
   });
 
   // Binding 1 chiều từ dữ liệu của state xuống giao diện
@@ -36,9 +66,64 @@ export function HandleForm({
     setStudent(newStudent);
   };
 
+  const handleValidate = () => {
+    let errors = {
+      msv: "",
+      fullName: "",
+      age: "",
+      gender: "",
+      phone: "",
+      email: "",
+    };
+
+    let REGEX_NUMBER = /^\d+$/;
+    if (student.msv.trim() === "") {
+      errors.msv = "Không được bỏ trống";
+    } else if (!REGEX_NUMBER.test(student.msv.trim())) {
+      errors.msv = "Không được nhập chữ";
+    } else if (listStudent.find((s) => s.msv === student.msv)) {
+      errors.msv = "Mã sinh viên đã tồn tại";
+    }
+
+    if (student.fullName.trim() === "") {
+      errors.fullName = "Không được bỏ trống";
+    }
+
+    if (student.age.trim() === "") {
+      errors.age = "Không được bỏ trống";
+    } else if (Number(student.age) <= 0) {
+      errors.age = "Tuổi không hợp lệ";
+    }
+
+    setErrors(errors);
+
+    // ---------------------------
+    const v = Object.values(errors);
+
+    console.log(v);
+
+    // Tất cả các trường error bằng rỗng thì mới hợp lệ
+    const isValid = v.every((field) => field.trim() === "");
+
+    return isValid;
+  };
+
   const handleSubmit = (event) => {
     // Prevent reload page
     event.preventDefault();
+
+    // Nếu đã submit thì chắc chắn đã touches toàn bộ, nên xét tất cả về giá trị true
+    setTouches({
+      msv: true,
+      fullName: true,
+      age: true,
+      gender: true,
+      phone: true,
+      email: true,
+    });
+
+    // Nếu như validate thất bại thì dừng function
+    if (!handleValidate()) return;
 
     if (isEdit) {
       // -------------------
@@ -54,11 +139,6 @@ export function HandleForm({
       });
 
       setListStudent(newListStudent);
-
-      // Sau khi update thành công
-      setIsEdit(false);
-      // reset studentEdit về null
-      setStudentEdit(null);
 
       // chuyển về trang trước đó.
       // 1: đi tới trang tiếp theo
@@ -81,27 +161,20 @@ export function HandleForm({
     }
   };
 
-  useEffect(
-    () => {
-      // Kiểm tra, nếu isEdit là true thì sẽ cập nhật student thành studentEdit
-      if (isEdit) {
-        setStudent(studentEdit);
-      }
-    },
-    // Những giá trị bị theo dõi, khi nào 1 trong những giá trị này thay đổi thì callback của useEffect sẽ chạy.
-    [isEdit, studentEdit]
-  );
+  const handleBlur = (event) => {
+    console.log(event.target.name); // age
 
-  // Trước khi component bị ẩn khỏi giao diện
-  useEffect(() => {
-    // ----------------
-    // ----------------
-    return () => {
-      // thì sẽ gọi function này
-      setIsEdit(false);
-      setStudentEdit(null);
-    };
-  }, []);
+    // Sau khi blur thì mình sẽ validate
+    handleValidate();
+
+    // Blur input nào thì đánh dấu nó đã từng chạm vào
+    setTouches({
+      ...touches,
+
+      // ???
+      [event.target.name]: true, // age: true
+    });
+  };
 
   return (
     <>
@@ -121,26 +194,44 @@ export function HandleForm({
             onChange={handleChange}
             name="msv"
             disabled={isEdit}
+            // Sự kiện lắng nghe khi người dùng rời khỏi ô input
+            onBlur={handleBlur}
           />
+
+          {touches.msv && errors.msv && (
+            <p className="text-red-600">{errors.msv}</p>
+          )}
         </div>
 
-        <Input
-          value={student.fullName}
-          label="Họ và Tên"
-          type="text"
-          placeholder="Nhập họ và tên"
-          onChange={handleChange}
-          name="fullName"
-        />
+        <div>
+          <Input
+            value={student.fullName}
+            label="Họ và Tên"
+            type="text"
+            placeholder="Nhập họ và tên"
+            onChange={handleChange}
+            name="fullName"
+            onBlur={handleBlur}
+          />
+          {touches.fullName && errors.fullName && (
+            <p className="text-red-600">{errors.fullName}</p>
+          )}
+        </div>
 
-        <Input
-          value={student.age}
-          label="Tuổi"
-          type="number"
-          placeholder="Nhập tuổi"
-          onChange={handleChange}
-          name="age"
-        />
+        <div>
+          <Input
+            value={student.age}
+            label="Tuổi"
+            type="number"
+            placeholder="Nhập tuổi"
+            onChange={handleChange}
+            name="age"
+            onBlur={handleBlur}
+          />
+          {touches.age && errors.age && (
+            <p className="text-red-600">{errors.age}</p>
+          )}
+        </div>
 
         <Select
           value={student.gender}

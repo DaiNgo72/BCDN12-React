@@ -19,6 +19,7 @@ import { TodoPage } from "./pages/todo";
 export function App() {
   const [listStudent, setListStudent] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  // ??? cái này có chạy trước khi giao diện được render hay không ??? Không chắc chắn được 100%. tại vì setState là 1 hàm không đồng bộ
   const [studentEdit, setStudentEdit] = useState({});
   console.log("studentEdit", studentEdit);
 
@@ -116,3 +117,62 @@ export function App() {
     </>
   );
 }
+
+// promise_1 gọi là instance của Promise.
+// promise_1 là một object
+// then, catch, finally
+const promise_1 = new Promise((resolve, reject) => {
+  // resolve + reject giống như là return trong function
+  // tìm được kết quả mà nó cần rồi thì resolve hay reject khác sẽ không được xử lý nữa
+  // resolve hoặc reject chỉ được 1 lần
+  setTimeout(() => {
+    if (Math.random() < 0.3) {
+      // Dậy nổi
+
+      resolve("thành công");
+      reject("thất bại 3");
+
+      console.log("---------------");
+      console.log("---------------");
+      console.log("---------------");
+
+      resolve("thành công 1");
+      resolve("thành công 2");
+    } else {
+      // Không dậy nổi
+
+      reject("thất bại");
+      resolve("thành công 3");
+
+      console.log("---------------");
+      console.log("---------------");
+      console.log("---------------");
+
+      reject("thất bại 1");
+      reject("thất bại 2");
+    }
+  }, 1000);
+
+  // cần 3s thì mới có kết quả trả về cho chúng ta
+
+  setTimeout(() => {
+    // tìm kiếm trong database
+    // coi thử có không
+    // nếu như có
+    // resolve(<ket_qua_tim_duoc>)
+    // nếu không tìm thấy
+    // resolve(null)
+    // Gọi sai đường dẫn, hoặc method cho cái dường dẫn đó không tồn tại
+    // reject(<error>)
+  }, 3000); // giả sử
+});
+
+const promise_1_1 = promise_1.then((response) => {
+  console.log(response);
+});
+
+promise_1_1
+  .then(() => {})
+  .catch((err) => {
+    console.log(err);
+  });

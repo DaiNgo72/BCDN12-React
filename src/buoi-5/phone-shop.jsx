@@ -25,7 +25,7 @@ export function PhoneShop() {
   const [sanPham, setSanPham] = useState(MOCK_DATA[0]);
 
   return (
-    <>
+    <div>
       <GioHang carts={carts} setCarts={setCarts} />
 
       <div style={{ display: "flex", gap: 20 }}>
@@ -44,7 +44,7 @@ export function PhoneShop() {
       </div>
 
       <Detail sanPham={sanPham} />
-    </>
+    </div>
   );
 }
 
@@ -94,7 +94,6 @@ function Phone(props) {
       setCarts(cloneArr);
     }
   };
-
 
   // ------------------------
   // /\/\/\/\/\/\/\/\/\/\/\/\
